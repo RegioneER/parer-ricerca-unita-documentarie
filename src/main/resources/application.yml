@@ -1,0 +1,126 @@
+quarkus:
+  application:
+   name: "Ricerca unità documentarie"
+  devservices:
+   enabled: false   
+  #package:
+    #type: "uber-jar"
+  http:
+    root-path: "/ricerca-unita-documentarie"
+    body:
+      handle-file-uploads: false
+      preallocate-body-buffer: true
+    auth:
+     basic: true		
+     policy:
+      role-api-policy:
+         roles-allowed: "admin,versatore"
+      role-internal-policy:
+         roles-allowed: "admin"       
+     permission:
+       api:
+          paths: "api/*"
+          policy: "role-api-policy"
+       internal:
+          paths: "admin/*,status"
+          policy: "role-internal-policy"
+  security: 
+    users:
+      embedded:
+        enabled: true		   		  
+  oidc:
+    enabled: true
+    discovery-enabled: false
+  transaction-manager:
+    default-transaction-timeout: "3600S" # impostato timeout ad un'ora rispetto il default (60S) per evitare problematiche di resultset chiusi prima del tempo		
+  datasource: 
+    db-kind: "oracle"
+    jdbc:
+      driver: "oracle.jdbc.driver.OracleDriver"
+  hibernate-orm:
+    dialect: "org.hibernate.dialect.OracleDialect"
+    packages: "it.eng.parer.ricerca.ud.jpa"
+    cache:
+      "cache":
+        expiration:
+          max-idle: 1h # second level cache max 1h per entity
+  smallrye-openapi:
+    info-title: "Ricerca unità documentarie API" 
+  swagger-ui:
+    always-include: true
+    validator-url: "none"
+#logging 
+  log:
+    level: INFO
+    console:
+      json: false
+      format: "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %X{log_uuid} %s%e%n"
+# indicizzazione beans esterni (TODO: da verificare)
+# [WARNING] [io.quarkus.deployment.steps.ReflectiveHierarchyStep] Unable to properly register the hierarchy of the following classes for reflection as they are not in the Jandex index:
+#        - it.eng.parer.ws.xml.versfascicolorespV2.EsitoVersamentoFascicolo (source: SmallRyeOpenApiProcessor > null)
+  index-dependency:
+    quarkuslogger:
+      group-id: "it.eng.parer"
+      artifact-id: "quarkus-custom-log-handlers"
+# custom values
+parer:
+  ricerca:
+    ud:
+      limite: 500			 
+# Profili (attivalibili con -Dquarkus-profile=)
+# Dev mode = quarkus:dev (necessario esplicitare -DQUARKUS_DATASOURCE_USER=<user> -DQUARKUS_DATASOURCE_PASSWORD=<password db>)
+"%dev":
+  quarkus:
+   http:
+     port: 10013
+   shutdown:
+    timeout: "PT1S"
+   hibernate-orm:
+     validate-in-dev-mode: false
+     database:
+       generation: "none"
+     log:
+      sql: true
+      format-sql: false
+   security:
+    users:
+      embedded:
+        plain-text: true
+        users:
+          #admin: "80589461aa1b0e9b7888f936787bf9bc" # echo -n admin:Quarkus:password | md5 
+          admin: "password"
+        roles: 
+          admin: "admin"        
+   log:
+     #level: ALL
+     category:
+       it.eng.parer.ricerca.ud:
+         level: "DEBUG"
+       #org.hibernate:
+         #level: "DEBUG"          
+# test datasource configuration
+"%test":
+  quarkus:
+   datasource: 
+     db-kind: "oracle"
+     jdbc:
+       driver: "oracle.jdbc.driver.OracleDriver"
+   hibernate-orm:
+     log:
+      sql: true
+      format-sql: false
+"%h2":
+  quarkus:
+    datasource:
+      db-kind: "h2"
+      jdbc:
+        driver: "org.h2.Driver"
+        url: "jdbc:h2:tcp://localhost/mem:test;DB_CLOSE_DELAY=-1"
+    hibernate-orm:
+      dialect: "org.hibernate.dialect.H2Dialect"
+      database:
+        generation:
+          create-schemas: true
+      log:
+        sql: true
+        format-sql: false
