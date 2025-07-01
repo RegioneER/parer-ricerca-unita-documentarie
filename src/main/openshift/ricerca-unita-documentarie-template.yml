@@ -35,7 +35,7 @@ objects:
 - apiVersion: v1
   kind: Secret
   data:
-    .dockerconfigjson: eyJhdXRocyI6eyJyZWdpc3RyeS5lbnRlLnJlZ2lvbmUuZW1yLml0L3BhcmVyLyI6eyJ1c2VybmFtZSI6Im9rZF9kZXBsb3kiLCJwYXNzd29yZCI6IlhUWkJ5V1lBQnZ4UVVMOFdreHFxIiwiZW1haWwiOiJnaXRsYWJAZGVwbG95LmxvY2FsIn19fQ==
+    .dockerconfigjson: <secret>
   metadata:
     name: gitlab-registry-token
   type: kubernetes.io/dockerconfigjson
