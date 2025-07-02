@@ -16,8 +16,6 @@ Di seguito verranno riportati sotto alcuni paragrafi, le modalità possibili con
 
 ## Rilascio su RedHat Openshift
 
-### Openshift template
-
 Per la creazione dell'applicazione con risorse necessarie correlate sotto Openshift (https://www.redhat.com/it/technologies/cloud-computing/openshift) viene fornito un apposito template (la solzuzione, modificabile, è basata su Oracle DB) [template](src/main/openshift/verifica-firma-crypto-template.yml).
 
 # Utilizzo
@@ -424,12 +422,3 @@ Progetto di proprietà di [Regione Emilia-Romagna](https://www.regione.emilia-ro
 # Licenza
 
 Questo progetto è rilasciato sotto licenza GNU Affero General Public License v3.0 or later ([LICENSE.txt](LICENSE.txt)).
-
-# Appendice
-
-## Spring Boot 3.x
-
-Alcuni riferimenti:
-
-- Migrazione Spring boot versione 3 https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide
-
