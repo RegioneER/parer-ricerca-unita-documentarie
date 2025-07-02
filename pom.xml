@@ -30,13 +30,13 @@
 		<idp-jaas-rdbms.version>0.0.9</idp-jaas-rdbms.version>
 	</properties>
 
-	<scm>
+<scm>
 		<developerConnection>
 			scm:git:https://github.com/RegioneER/parer-ricerca-unita-documentarie.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
-	<distributionManagement>
+<distributionManagement>
         <repository>
           <id>github</id>
           <url>https://maven.pkg.github.com/RegioneER/parer-ricerca-unita-documentarie</url>
