@@ -58,7 +58,7 @@ maintenance:
     - name: ' Engineering Ingegneria Informatica S.p.A.'
       until: '2026-12-23'
   type: contract
-name: Parer - Sacer
+name: Parer - Ricerca unità documentarie
 platforms:
   - linux
 releaseDate: '2023-11-13'
