@@ -8,15 +8,15 @@ Fonte template redazione documento:  https://www.makeareadme.com/.
 
 # Descrizione
 
-Web service REST per la ricerca di unità documentaria precedentemente versate attraverso invocazione dell'opportuno servizio SACER di versamento unità documentaria sincrono. Se invocato opportunamente tale servizio restituisce una o più unità documentarie secondo anche filtri di ricerca che possono raffinare il risultato.
+Web service REST per la ricerca di unità documentarie conservate nel sistema di conservazione Sacer. Se invocato opportunamente, tale servizio restituisce la chiave di una o più unità documentarie secondo i filtri di ricerca impostati.
 
 # Installazione
 
-Di seguito verranno riportati sotto alcuni paragrafi, le modalità possibili con cui è possibile rendere operativo il microservizio. 
+Di seguito sono riportate le varie modalità con cui è possibile rendere operativo questo microservizio. 
 
 ## Rilascio su RedHat Openshift
 
-Per la creazione dell'applicazione con risorse necessarie correlate sotto Openshift (https://www.redhat.com/it/technologies/cloud-computing/openshift) viene fornito un apposito template (la solzuzione, modificabile, è basata su Oracle DB) [template](src/main/openshift/verifica-firma-crypto-template.yml).
+Per la creazione dell'applicazione con risorse necessarie correlate sotto Openshift (https://www.redhat.com/it/technologies/cloud-computing/openshift) viene fornito un apposito template (la solzuzione, modificabile, è basata su Oracle DB) [template](src/main/openshift/ricerca-unita-documentarie-template.yml).
 
 # Utilizzo
 
