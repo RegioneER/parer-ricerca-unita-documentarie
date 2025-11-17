@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.hibernate.jpa.HibernateHints;
 
@@ -139,7 +139,7 @@ public class FindUdDao implements IFindUnitaDocDao {
 	    }
 
 	    // clean
-	    String queryClean = StringUtils.removeEnd(queryStr.toString(), QUERY_AND);
+	    String queryClean = Strings.CS.removeEnd(queryStr.toString(), QUERY_AND);
 	    // order by to and versus
 	    // ordinamento fisso per dtCrezione (pagination
 	    // purpose..https://engineering.getmidas.com/why-do-you-need-keyset-seek-pagination-ef99815b518e)

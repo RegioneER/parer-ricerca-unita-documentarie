@@ -83,6 +83,8 @@ public class AroUnitaDoc implements Serializable {
 
     private Long idUserVers;
 
+    private String dlOggettoUnitaDoc;
+
     public AroUnitaDoc() {/* Hibernate */
     }
 
@@ -204,6 +206,15 @@ public class AroUnitaDoc implements Serializable {
     @Column(name = "ID_USER_VERS")
     public Long getIdUserVers() {
 	return this.idUserVers;
+    }
+
+    @Column(name = "DL_OGGETTO_UNITA_DOC")
+    public String getDlOggettoUnitaDoc() {
+	return this.dlOggettoUnitaDoc;
+    }
+
+    public void setDlOggettoUnitaDoc(String dlOggettoUnitaDoc) {
+	this.dlOggettoUnitaDoc = dlOggettoUnitaDoc;
     }
 
 }
