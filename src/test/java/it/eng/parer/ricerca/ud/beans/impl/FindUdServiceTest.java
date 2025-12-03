@@ -21,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +33,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.TestProfile;
 import it.eng.parer.ricerca.ud.Profiles;
 import it.eng.parer.ricerca.ud.beans.IFindUnitadocService;
+import it.eng.parer.ricerca.ud.beans.dto.UdDto;
 import it.eng.parer.ricerca.ud.beans.model.UdFilter;
 import it.eng.parer.ricerca.ud.beans.model.UdResponse;
 import it.eng.parer.ricerca.ud.beans.utils.UdFilterParser;
@@ -69,12 +72,12 @@ class FindUdServiceTest {
     }
 
     @Test
-    void findUdByQuertStr_ok() {
+    void findUdByQueryStr_ok() {
 	assertDoesNotThrow(() -> service.findUdByQuertStr(USERID, filter, StringUtils.EMPTY));
     }
 
     @Test
-    void findUdByQuertStrNoResult_ok() {
+    void findUdByQueryStrNoResult_ok() {
 	// filter
 	UdFilter myfilter = UdFilter.builder().amb("PARER_PROVA").ente("ente_test")
 		.strut("PARER_TEST").anno(new BigDecimal(1800)).build();
@@ -85,7 +88,7 @@ class FindUdServiceTest {
     }
 
     @Test
-    void findUdByQuertStrNoFilter_ko() {
+    void findUdByQueryStrNoFilter_ko() {
 	ConstraintViolationException exe = assertThrows(ConstraintViolationException.class,
 		() -> service.findUdByQuertStr(USERID, null, StringUtils.EMPTY));
 	assertEquals("filter non valorizzato",
@@ -94,7 +97,7 @@ class FindUdServiceTest {
     }
 
     @Test
-    void findUdByQuertStrNoUserId_ko() {
+    void findUdByQueryStrNoUserId_ko() {
 	ConstraintViolationException exe = assertThrows(ConstraintViolationException.class,
 		() -> service.findUdByQuertStr(null, filter, StringUtils.EMPTY));
 	assertEquals("userId non valorizzato",
@@ -102,14 +105,14 @@ class FindUdServiceTest {
     }
 
     @Test
-    void findUdByQuertStrNextPageTokenNotNull_ok() {
+    void findUdByQueryStrNextPageTokenNotNull_ok() {
 	UdResponse response = assertDoesNotThrow(
 		() -> service.findUdByQuertStr(USERID, filter, StringUtils.EMPTY));
 	assertNotNull(response.getNextpagetoken());
     }
 
     @Test
-    void findUdByQuertStrPaginationWithNextPageToken_ok() {
+    void findUdByQueryStrPaginationWithNextPageToken_ok() {
 	// first query
 	UdQuery query1 = new UdQuery();
 	// mandatory
@@ -145,4 +148,46 @@ class FindUdServiceTest {
 	// check different list uds on response1 vs response2
 	assertFalse(response2.getUnitadocumentarie().containsAll(response1.getUnitadocumentarie()));
     }
+
+    @Test
+    void findUdByQueryStrAndCheckResponseContent_ok() {
+	// filter
+	UdFilter myfilter = UdFilter.builder().amb("PARER_PROVA").ente("ente_test")
+		.strut("PARER_TEST").anno(new BigDecimal(2025)).numero("37455").build();
+
+	UdResponse response = assertDoesNotThrow(
+		() -> service.findUdByQuertStr(USERID, myfilter, StringUtils.EMPTY));
+	// check ud response not empty
+	assertFalse(response.getUnitadocumentarie().isEmpty());
+	// check mandatory fields on ud response
+	UdDto dto = response.getUnitadocumentarie().get(0);
+	// check dto
+	assertEquals("CT-", dto.getRegistro());
+	assertEquals(new BigDecimal(2025), dto.getAnno());
+	assertEquals("37455", dto.getNumero());
+	assertEquals("Scontratto", dto.getTipologia());
+	assertEquals(LocalDate.of(2017, 11, 28), dto.getDataunitadocumentaria());
+	assertEquals("CONTRATTO", dto.getTipodocprincipale());
+	assertEquals(new BigDecimal(0), dto.getNrallegati());
+	assertEquals(new BigDecimal(0), dto.getNrannessi());
+	assertEquals(new BigDecimal(0), dto.getNrannotazioni());
+	assertEquals(true, dto.getForzaaccettazione());
+	assertEquals(true, dto.getForzaconservazione());
+	assertEquals(LocalDateTime.of(2025, 03, 24, 13, 29, 57), dto.getDataversamento());
+	assertEquals(false, dto.getFirmato());
+	assertEquals("IN_ELENCO_COMPLETATO", dto.getStatogenindiceaip());
+	assertEquals("AIP_GENERATO", dto.getStatoconservazione());
+	assertEquals(
+		"APPROVAZIONE PROGRAMMA DEGLI INCARICHI ESTERNI DA CONFERIRE NELL'ANNO 2018 (CI/2017/0000001)",
+		dto.getOggetto());
+	// check totale
+	assertEquals(Integer.valueOf(1), response.getTotale());
+	// check nextpagetoken
+	assertEquals(
+		"H4sIAAAAAAAA_y2LsQrCMBQA_-ZthfYlMVrIULCDkyXGruVpMxRMAsmL328VlxuOO6DwMNNgR7tM9joP4CN788XCvjAUzpX_gRtvDijGZLBFBbEGn5MRWioFKzG9fS4U9jcZKk-oL95COvO86_v6e5pWNChdJ3o89UpDTPGyFnOUB60QhezwA929OkCQAAAA",
+		response.getNextpagetoken());
+	// check path
+	assertEquals("asc", response.getDataversamento());
+    }
+
 }

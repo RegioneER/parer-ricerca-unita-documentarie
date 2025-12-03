@@ -44,6 +44,8 @@ quarkus:
       "cache":
         expiration:
           max-idle: 1h # second level cache max 1h per entity
+    jdbc:
+     statement-fetch-size: 1000		  
   smallrye-openapi:
     info-title: "Ricerca unità documentarie API" 
   swagger-ui:
@@ -53,7 +55,6 @@ quarkus:
   log:
     level: INFO
     console:
-      json: false
       format: "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %X{log_uuid} %s%e%n"
 # indicizzazione beans esterni (TODO: da verificare)
 # [WARNING] [io.quarkus.deployment.steps.ReflectiveHierarchyStep] Unable to properly register the hierarchy of the following classes for reflection as they are not in the Jandex index:
@@ -77,11 +78,11 @@ parer:
     timeout: "PT1S"
    hibernate-orm:
      validate-in-dev-mode: false
-     database:
-       generation: "none"
+     schema-management:
+      strategy: "none"
      log:
       sql: true
-      format-sql: false
+      format-sql: false	  
    security:
     users:
       embedded:
@@ -108,7 +109,7 @@ parer:
    hibernate-orm:
      log:
       sql: true
-      format-sql: false
+      format-sql: false	  
 "%h2":
   quarkus:
     datasource:

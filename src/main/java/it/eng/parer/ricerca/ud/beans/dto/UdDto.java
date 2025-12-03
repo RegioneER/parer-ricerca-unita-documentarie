@@ -40,7 +40,7 @@ public class UdDto implements Serializable {
     private BigDecimal anno;
     private String numero;
     private String tipologia;
-    @Schema(type = SchemaType.STRING, required = false, example = "date", format = "dd-MM-yyyy", implementation = LocalDate.class)
+    @Schema(type = SchemaType.STRING, required = false, examples = "date", format = "dd-MM-yyyy", implementation = LocalDate.class)
     private LocalDate dataunitadocumentaria;
     private String tipodocprincipale;
     @Schema(type = SchemaType.NUMBER, format = "int32")
@@ -51,13 +51,14 @@ public class UdDto implements Serializable {
     private BigDecimal nrannotazioni;
     private Boolean forzaaccettazione;
     private Boolean forzaconservazione;
-    @Schema(type = SchemaType.STRING, required = false, example = "date-time", format = "dd-MM-yyyy hh:mm:ss", implementation = LocalDateTime.class)
+    @Schema(type = SchemaType.STRING, required = false, examples = "date-time", format = "dd-MM-yyyy hh:mm:ss", implementation = LocalDateTime.class)
     private LocalDateTime dataversamento;
     private Boolean firmato;
     private String esitofirme;
     private String descresitofirme;
     private String statogenindiceaip;
     private String statoconservazione;
+    private String oggetto;
 
     public UdDto() {
 	super();
@@ -80,6 +81,7 @@ public class UdDto implements Serializable {
 	this.descresitofirme = ud.getDsMsgEsitoVerifFirme();
 	this.statogenindiceaip = ud.getTiStatoUdElencoVers();
 	this.statoconservazione = ud.getTiStatoConservazione().name();
+	this.oggetto = ud.getDlOggettoUnitaDoc();
 	//
 	this.tipologia = tipoUd.getNmTipoUnitaDoc();
 	this.tipodocprincipale = tiDocPrincipal.getNmTipoDoc();
@@ -153,6 +155,10 @@ public class UdDto implements Serializable {
 
     public String getStatoconservazione() {
 	return statoconservazione;
+    }
+
+    public String getOggetto() {
+	return oggetto;
     }
 
 }
