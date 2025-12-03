@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>ricerca-unita-documentarie</artifactId>
-	<version>1.3.0-SNAPSHOT</version>
+	<version>1.3.0</version>
 	<name>ricerca-unita-documentarie</name>
 	<description>Progetto api per restituzione di organizzazioni abilitate</description>
 
@@ -32,7 +32,7 @@
 <scm>
 		<developerConnection>
 			scm:git:https://github.com/RegioneER/parer-ricerca-unita-documentarie.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>ricerca-unita-documentarie-1.3.0</tag>
 	</scm>
 
 <distributionManagement>
