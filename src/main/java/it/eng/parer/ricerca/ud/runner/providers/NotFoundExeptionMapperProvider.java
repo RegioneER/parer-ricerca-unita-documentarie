@@ -35,8 +35,8 @@ public class NotFoundExeptionMapperProvider implements ExceptionMapper<NotFoundE
 
     @Override
     public Response toResponse(NotFoundException exception) {
-	log.atError().log("Eccezione generica", exception);
-	return Response.status(404).build();
+        log.atError().log("Eccezione generica", exception);
+        return Response.status(404).build();
     }
 
 }

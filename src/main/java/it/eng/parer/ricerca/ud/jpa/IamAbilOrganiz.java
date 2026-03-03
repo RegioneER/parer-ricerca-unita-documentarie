@@ -54,29 +54,29 @@ public class IamAbilOrganiz implements Serializable {
     @Id
     @Column(name = "ID_ABIL_ORGANIZ")
     public Long getIdAbilOrganiz() {
-	return this.idAbilOrganiz;
+        return this.idAbilOrganiz;
     }
 
     @Column(name = "FL_ORGANIZ_DEFAULT", columnDefinition = "char(1)")
     public String getFlOrganizDefault() {
-	return this.flOrganizDefault;
+        return this.flOrganizDefault;
     }
 
     @Column(name = "ID_ORGANIZ_APPLIC")
     public Long getIdOrganizApplic() {
-	return this.idOrganizApplic;
+        return this.idOrganizApplic;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USER_IAM")
     public IamUser getIamUser() {
-	return this.iamUser;
+        return this.iamUser;
     }
 
     @OneToMany(cascade = {
-	    CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
-	    CascadeType.REMOVE }, mappedBy = "iamAbilOrganiz")
+            CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
+            CascadeType.REMOVE }, mappedBy = "iamAbilOrganiz")
     public List<IamAutorServ> getIamAutorServs() {
-	return this.iamAutorServs;
+        return this.iamAutorServs;
     }
 }

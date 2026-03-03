@@ -50,28 +50,28 @@ public class OrgStrut implements Serializable {
     @Id
     @Column(name = "ID_STRUT")
     public Long getIdStrut() {
-	return this.idStrut;
+        return this.idStrut;
     }
 
     @Column(name = "DS_STRUT")
     public String getDsStrut() {
-	return this.dsStrut;
+        return this.dsStrut;
     }
 
     @Column(name = "CD_STRUT_NORMALIZ")
     public String getCdStrutNormaliz() {
-	return this.cdStrutNormaliz;
+        return this.cdStrutNormaliz;
     }
 
     @Column(name = "NM_STRUT")
     public String getNmStrut() {
-	return this.nmStrut;
+        return this.nmStrut;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ENTE")
     public OrgEnte getOrgEnte() {
-	return this.orgEnte;
+        return this.orgEnte;
     }
 
 }

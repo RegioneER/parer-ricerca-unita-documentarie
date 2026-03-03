@@ -91,130 +91,130 @@ public class AroUnitaDoc implements Serializable {
     @Id
     @Column(name = "ID_UNITA_DOC")
     public Long getIdUnitaDoc() {
-	return this.idUnitaDoc;
+        return this.idUnitaDoc;
     }
 
     @Column(name = "AA_KEY_UNITA_DOC")
     public BigDecimal getAaKeyUnitaDoc() {
-	return this.aaKeyUnitaDoc;
+        return this.aaKeyUnitaDoc;
     }
 
     @Column(name = "CD_KEY_UNITA_DOC")
     public String getCdKeyUnitaDoc() {
-	return this.cdKeyUnitaDoc;
+        return this.cdKeyUnitaDoc;
     }
 
     @Column(name = "CD_KEY_UNITA_DOC_NORMALIZ")
     public String getCdKeyUnitaDocNormaliz() {
-	return this.cdKeyUnitaDocNormaliz;
+        return this.cdKeyUnitaDocNormaliz;
     }
 
     @Column(name = "CD_REGISTRO_KEY_UNITA_DOC")
     public String getCdRegistroKeyUnitaDoc() {
-	return this.cdRegistroKeyUnitaDoc;
+        return this.cdRegistroKeyUnitaDoc;
     }
 
     @Column(name = "DS_MSG_ESITO_VERIF_FIRME")
     public String getDsMsgEsitoVerifFirme() {
-	return this.dsMsgEsitoVerifFirme;
+        return this.dsMsgEsitoVerifFirme;
     }
 
     @Column(name = "DT_CREAZIONE")
     public LocalDateTime getDtCreazione() {
-	return this.dtCreazione;
+        return this.dtCreazione;
     }
 
     @Column(name = "DT_REG_UNITA_DOC")
     public LocalDate getDtRegUnitaDoc() {
-	return this.dtRegUnitaDoc;
+        return this.dtRegUnitaDoc;
     }
 
     @Convert(converter = FlBooleanConverter.class)
     @Column(name = "FL_FORZA_ACCETTAZIONE")
     public Boolean getFlForzaAccettazione() {
-	return this.flForzaAccettazione;
+        return this.flForzaAccettazione;
     }
 
     @Convert(converter = FlBooleanConverter.class)
     @Column(name = "FL_FORZA_COLLEGAMENTO")
     public Boolean getFlForzaCollegamento() {
-	return this.flForzaCollegamento;
+        return this.flForzaCollegamento;
     }
 
     @Convert(converter = FlBooleanConverter.class)
     @Column(name = "FL_FORZA_CONSERVAZIONE")
     public Boolean getFlForzaConservazione() {
-	return this.flForzaConservazione;
+        return this.flForzaConservazione;
     }
 
     @Column(name = "FL_UNITA_DOC_FIRMATO")
     public Boolean getFlUnitaDocFirmato() {
-	return this.flUnitaDocFirmato;
+        return this.flUnitaDocFirmato;
     }
 
     @Column(name = "NI_ALLEG")
     public BigDecimal getNiAlleg() {
-	return this.niAlleg;
+        return this.niAlleg;
     }
 
     @Column(name = "NI_ANNESSI")
     public BigDecimal getNiAnnessi() {
-	return this.niAnnessi;
+        return this.niAnnessi;
     }
 
     @Column(name = "NI_ANNOT")
     public BigDecimal getNiAnnot() {
-	return this.niAnnot;
+        return this.niAnnot;
     }
 
     @Column(name = "TI_CONSERVAZIONE")
     public String getTiConservazione() {
-	return this.tiConservazione;
+        return this.tiConservazione;
     }
 
     @Column(name = "TI_ESITO_VERIF_FIRME")
     public String getTiEsitoVerifFirme() {
-	return this.tiEsitoVerifFirme;
+        return this.tiEsitoVerifFirme;
     }
 
     @Enumerated(EnumType.STRING)
     @Column(name = "TI_STATO_CONSERVAZIONE")
     public AroUnitaDocCnts.TiStatoConservazione getTiStatoConservazione() {
-	return this.tiStatoConservazione;
+        return this.tiStatoConservazione;
     }
 
     @Column(name = "TI_STATO_UD_ELENCO_VERS")
     public String getTiStatoUdElencoVers() {
-	return this.tiStatoUdElencoVers;
+        return this.tiStatoUdElencoVers;
     }
 
     @Column(name = "ID_REGISTRO_UNITA_DOC")
     public Long getIdRegistroUnitaDoc() {
-	return this.idRegistroUnitaDoc;
+        return this.idRegistroUnitaDoc;
     }
 
     @Column(name = "ID_TIPO_UNITA_DOC")
     public Long getIdTipoUnitaDoc() {
-	return this.idTipoUnitaDoc;
+        return this.idTipoUnitaDoc;
     }
 
     @Column(name = "ID_STRUT")
     public Long getIdStrut() {
-	return this.idStrut;
+        return this.idStrut;
     }
 
     @Column(name = "ID_USER_VERS")
     public Long getIdUserVers() {
-	return this.idUserVers;
+        return this.idUserVers;
     }
 
     @Column(name = "DL_OGGETTO_UNITA_DOC")
     public String getDlOggettoUnitaDoc() {
-	return this.dlOggettoUnitaDoc;
+        return this.dlOggettoUnitaDoc;
     }
 
     public void setDlOggettoUnitaDoc(String dlOggettoUnitaDoc) {
-	this.dlOggettoUnitaDoc = dlOggettoUnitaDoc;
+        this.dlOggettoUnitaDoc = dlOggettoUnitaDoc;
     }
 
 }

@@ -51,24 +51,24 @@ public class IamAbilTipoDato implements Serializable {
 
     @Id
     public Long getIdAbilTipoDato() {
-	return this.idAbilTipoDato;
+        return this.idAbilTipoDato;
     }
 
     @Column(name = "ID_TIPO_DATO_APPLIC")
     public Long getIdTipoDatoApplic() {
-	return this.idTipoDatoApplic;
+        return this.idTipoDatoApplic;
     }
 
     @Column(name = "NM_CLASSE_TIPO_DATO")
     public String getNmClasseTipoDato() {
-	return this.nmClasseTipoDato;
+        return this.nmClasseTipoDato;
     }
 
     // bi-directional many-to-one association to IamAbilOrganiz
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ABIL_ORGANIZ")
     public IamAbilOrganiz getIamAbilOrganiz() {
-	return this.iamAbilOrganiz;
+        return this.iamAbilOrganiz;
     }
 
 }

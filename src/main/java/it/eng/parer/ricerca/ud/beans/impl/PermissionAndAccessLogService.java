@@ -74,96 +74,96 @@ public class PermissionAndAccessLogService implements IPermissionAndAccessLogSer
 
     @Startup
     protected void init() throws UnknownHostException {
-	log.atDebug().log("RicercaUnitaDocumentarie - Init PermissionAndAccessLogService start");
-	// calculate servername
-	servername = new AppServerInstance().getMyHostAddress().getCanonicalHostName() + "/"
-		+ instanceUUID;
-	// load standard params from db
-	mapIdpLoggerParams = loadIdpLoggerParams();
-	log.atDebug().log("RicercaUnitaDocumentarie - Init PermissionAndAccessLogService complete");
+        log.atDebug().log("RicercaUnitaDocumentarie - Init PermissionAndAccessLogService start");
+        // calculate servername
+        servername = new AppServerInstance().getMyHostAddress().getCanonicalHostName() + "/"
+                + instanceUUID;
+        // load standard params from db
+        mapIdpLoggerParams = loadIdpLoggerParams();
+        log.atDebug().log("RicercaUnitaDocumentarie - Init PermissionAndAccessLogService complete");
     }
 
     @Override
     @Transactional(value = TxType.REQUIRED, rollbackOn = {
-	    AppGenericRuntimeException.class })
+            AppGenericRuntimeException.class })
     public boolean isUserEnabledOnService(
-	    @NotBlank(message = "userId non valorizzato") String nmUserid) {
-	try {
-	    log.atDebug().log(
-		    "RicercaUnitaDocumentarie - Verifica abilitazione utente {} al servizio {}",
-		    nmUserid, SERVICE_NAME);
-	    return dao.checkUserEnabledOnService(nmUserid);
-	} catch (Exception e) {
-	    throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
-		    .cause(e).message("Errore verifica abilitazione utente {0} su servizio {1}",
-			    nmUserid, SERVICE_NAME)
-		    .build();
-	}
+            @NotBlank(message = "userId non valorizzato") String nmUserid) {
+        try {
+            log.atDebug().log(
+                    "RicercaUnitaDocumentarie - Verifica abilitazione utente {} al servizio {}",
+                    nmUserid, SERVICE_NAME);
+            return dao.checkUserEnabledOnService(nmUserid);
+        } catch (Exception e) {
+            throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
+                    .cause(e).message("Errore verifica abilitazione utente {0} su servizio {1}",
+                            nmUserid, SERVICE_NAME)
+                    .build();
+        }
 
     }
 
     @Override
     @Transactional(value = TxType.REQUIRED, rollbackOn = {
-	    AppGenericRuntimeException.class })
+            AppGenericRuntimeException.class })
     public void createAccessLog(@NotBlank(message = "userId non valorizzato") String nmUserid,
-	    String ipAddr) {
+            String ipAddr) {
 
-	try {
-	    // create log
-	    LogDto logDto = new LogDto();
-	    logDto.setNmAttore("Ricerca Unità Documentarie WS");
-	    logDto.setNmUser(nmUserid);
-	    logDto.setCdIndIpClient(ipAddr);
-	    logDto.setTsEvento(convert(LocalDateTime.now()));
-	    // log della corretta autenticazione
-	    logDto.setTipoEvento(LogDto.TipiEvento.LOGIN_OK);
-	    logDto.setDsEvento("WS, login OK");
-	    logDto.setServername(servername);
+        try {
+            // create log
+            LogDto logDto = new LogDto();
+            logDto.setNmAttore("Ricerca Unità Documentarie WS");
+            logDto.setNmUser(nmUserid);
+            logDto.setCdIndIpClient(ipAddr);
+            logDto.setTsEvento(convert(LocalDateTime.now()));
+            // log della corretta autenticazione
+            logDto.setTipoEvento(LogDto.TipiEvento.LOGIN_OK);
+            logDto.setDsEvento("WS, login OK");
+            logDto.setServername(servername);
 
-	    log.atDebug().log("RicercaUnitaDocumentarie - Creazione access log {}", logDto);
-	    // insert access log
-	    checkAndInsertAccessLog(logDto, mapIdpLoggerParams);
-	} catch (Exception e) {
-	    throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
-		    .cause(e).message("Errore generico").build();
-	}
+            log.atDebug().log("RicercaUnitaDocumentarie - Creazione access log {}", logDto);
+            // insert access log
+            checkAndInsertAccessLog(logDto, mapIdpLoggerParams);
+        } catch (Exception e) {
+            throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
+                    .cause(e).message("Errore generico").build();
+        }
 
     }
 
     private HashMap<String, String> loadIdpLoggerParams() {
-	return dao.loadIdpLoggerParams(IDP_LOG_ACESSI_FUNCT);
+        return dao.loadIdpLoggerParams(IDP_LOG_ACESSI_FUNCT);
     }
 
     private void checkAndInsertAccessLog(LogDto logDto, HashMap<String, String> params) {
-	if (ObjectUtils.isNotEmpty(params.get(IDP_QRY_REGISTRA_EVENTO_UTENTE))
-		&& ObjectUtils.isNotEmpty(params.get(IDP_QRY_VERIFICA_DISATTIVAZIONE_UTENTE))
-		&& ObjectUtils.isNotEmpty(params.get(IDP_QRY_DISABLE_USER))
-		&& ObjectUtils.isNotEmpty(params.get(IDP_MAX_GIORNI))
-		&& ObjectUtils.isNotEmpty(params.get(IDP_MAX_TENTATIVI_FALLITI))) {
-	    try (Connection connection = dataSource.getConnection()) {
+        if (ObjectUtils.isNotEmpty(params.get(IDP_QRY_REGISTRA_EVENTO_UTENTE))
+                && ObjectUtils.isNotEmpty(params.get(IDP_QRY_VERIFICA_DISATTIVAZIONE_UTENTE))
+                && ObjectUtils.isNotEmpty(params.get(IDP_QRY_DISABLE_USER))
+                && ObjectUtils.isNotEmpty(params.get(IDP_MAX_GIORNI))
+                && ObjectUtils.isNotEmpty(params.get(IDP_MAX_TENTATIVI_FALLITI))) {
+            try (Connection connection = dataSource.getConnection()) {
 
-		IdpConfigLog icl = new IdpConfigLog();
-		icl.setQryRegistraEventoUtente(params.get(IDP_QRY_REGISTRA_EVENTO_UTENTE));
-		icl.setQryVerificaDisattivazioneUtente(
-			params.get(IDP_QRY_VERIFICA_DISATTIVAZIONE_UTENTE));
-		icl.setQryDisabilitaUtente(params.get(IDP_QRY_DISABLE_USER));
-		icl.setMaxTentativi(Integer.parseInt(params.get(IDP_MAX_TENTATIVI_FALLITI)));
-		icl.setMaxGiorni(Integer.parseInt(params.get(IDP_MAX_GIORNI)));
+                IdpConfigLog icl = new IdpConfigLog();
+                icl.setQryRegistraEventoUtente(params.get(IDP_QRY_REGISTRA_EVENTO_UTENTE));
+                icl.setQryVerificaDisattivazioneUtente(
+                        params.get(IDP_QRY_VERIFICA_DISATTIVAZIONE_UTENTE));
+                icl.setQryDisabilitaUtente(params.get(IDP_QRY_DISABLE_USER));
+                icl.setMaxTentativi(Integer.parseInt(params.get(IDP_MAX_TENTATIVI_FALLITI)));
+                icl.setMaxGiorni(Integer.parseInt(params.get(IDP_MAX_GIORNI)));
 
-		IdpLogger idpLogger = new IdpLogger(icl);
-		idpLogger.scriviLog(logDto, connection);
+                IdpLogger idpLogger = new IdpLogger(icl);
+                idpLogger.scriviLog(logDto, connection);
 
-		log.atDebug().log("RicercaUnitaDocumentarie - Creazione access log completata",
-			logDto);
-	    } catch (UnknownHostException e) {
-		throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
-			.cause(e).message("Errore nel determinare il nome host per il server")
-			.build();
-	    } catch (SQLException e) {
-		throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
-			.cause(e).message("Errore nell'accesso ai dati di log").build();
-	    }
-	}
+                log.atDebug().log("RicercaUnitaDocumentarie - Creazione access log completata",
+                        logDto);
+            } catch (UnknownHostException e) {
+                throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
+                        .cause(e).message("Errore nel determinare il nome host per il server")
+                        .build();
+            } catch (SQLException e) {
+                throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
+                        .cause(e).message("Errore nell'accesso ai dati di log").build();
+            }
+        }
     }
 
 }

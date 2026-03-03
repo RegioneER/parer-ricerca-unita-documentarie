@@ -54,28 +54,28 @@ public class DecTipoDoc implements Serializable {
     @Id
     @Column(name = "ID_TIPO_DOC")
     public Long getIdTipoDoc() {
-	return this.idTipoDoc;
+        return this.idTipoDoc;
     }
 
     @Column(name = "DS_TIPO_DOC")
     public String getDsTipoDoc() {
-	return this.dsTipoDoc;
+        return this.dsTipoDoc;
     }
 
     @Column(name = "FL_TIPO_DOC_PRINCIPALE", columnDefinition = "char(1)")
     public String getFlTipoDocPrincipale() {
-	return this.flTipoDocPrincipale;
+        return this.flTipoDocPrincipale;
     }
 
     @Column(name = "NM_TIPO_DOC")
     public String getNmTipoDoc() {
-	return this.nmTipoDoc;
+        return this.nmTipoDoc;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_STRUT")
     public OrgStrut getOrgStrut() {
-	return this.orgStrut;
+        return this.orgStrut;
     }
 
 }

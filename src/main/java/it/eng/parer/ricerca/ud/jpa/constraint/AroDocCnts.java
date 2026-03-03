@@ -19,7 +19,7 @@ public final class AroDocCnts {
     }
 
     public enum TiDoc {
-	ALLEGATO, ANNESSO, ANNOTAZIONE, PRINCIPALE
+        ALLEGATO, ANNESSO, ANNOTAZIONE, PRINCIPALE
     }
 
 }

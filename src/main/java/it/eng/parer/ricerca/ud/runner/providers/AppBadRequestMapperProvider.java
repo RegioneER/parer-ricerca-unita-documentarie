@@ -40,8 +40,8 @@ public class AppBadRequestMapperProvider implements ExceptionMapper<AppBadReques
 
     @Override
     public Response toResponse(AppBadRequestException exception) {
-	log.atError().log("Eccezione generica", exception);
-	return Response.status(400).entity(Map.of(COD_ERR_BADREQ, exception.getMessage())).build();
+        log.atError().log("Eccezione generica", exception);
+        return Response.status(400).entity(Map.of(COD_ERR_BADREQ, exception.getMessage())).build();
 
     }
 

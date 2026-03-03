@@ -49,22 +49,22 @@ public class DecRegistroUnitaDoc implements Serializable {
     @Id
     @Column(name = "ID_REGISTRO_UNITA_DOC")
     public Long getIdRegistroUnitaDoc() {
-	return this.idRegistroUnitaDoc;
+        return this.idRegistroUnitaDoc;
     }
 
     @Column(name = "CD_REGISTRO_UNITA_DOC")
     public String getCdRegistroUnitaDoc() {
-	return this.cdRegistroUnitaDoc;
+        return this.cdRegistroUnitaDoc;
     }
 
     @Column(name = "CD_REGISTRO_NORMALIZ")
     public String getCdRegistroNormaliz() {
-	return this.cdRegistroNormaliz;
+        return this.cdRegistroNormaliz;
     }
 
     @Column(name = "ID_STRUT")
     public Long getIdStrut() {
-	return this.idStrut;
+        return this.idStrut;
     }
 
 }

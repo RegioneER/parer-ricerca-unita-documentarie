@@ -8,7 +8,23 @@ Fonte template redazione documento:  https://www.makeareadme.com/.
 
 # Descrizione
 
-Web service REST per la ricerca di unità documentarie conservate nel sistema di conservazione Sacer. Se invocato opportunamente, tale servizio restituisce la chiave di una o più unità documentarie secondo i filtri di ricerca impostati.
+API REST per la ricerca di unità documentarie conservate nel sistema Sacer. Se invocato opportunamente, tale servizio restituisce una lista (JSON standard) di unità documentarie secondo i criteri (o filtri) di ricerca impostati attraverso query-params.
+
+## Esempio di invocazione 
+
+Di seguito un esempio di invocazione dell'API esposta (per maggiori informazioni è possibile utilizzare il descrittore YAML ottenuto secondo definizione standard OAS 3.1): 
+
+```
+curl -X 'GET' \
+'<URI>/ricerca-unita-documentarie/api/unitadocumentarie?amb=PARER&ente=ACER&strut=acepbo&anno=2026' \ 
+-H 'accept: application/json'
+
+```
+
+## Swagger (OpenAPI)
+
+Per la definizione completa è possibile utilizzare l'apposito descrittore OpenAPI generato mediante MicroProfile (Swagger) : `<URI>/ricerca-unita-documentarie/q/swagger-ui`
+
 
 # Installazione
 

@@ -31,6 +31,6 @@ public interface IFindUnitadocService {
      *
      */
     UdResponse findUdByQuertStr(@NotBlank(message = "userId non valorizzato") String userId,
-	    @NotNull(message = "filter non valorizzato") UdFilter filter, String uri);
+            @NotNull(message = "filter non valorizzato") UdFilter filter, String uri);
 
 }

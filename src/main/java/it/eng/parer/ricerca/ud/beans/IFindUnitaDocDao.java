@@ -36,7 +36,7 @@ public interface IFindUnitaDocDao {
      * @return stream con unità documetarie 0..N
      */
     Stream<AroUnitaDoc> findUnitadocsByQueryStr(Long idStrut, Optional<Long> idResgistroUd,
-	    Optional<Long> idTipoUd, Optional<Long> idUserVers, UdFilter filter);
+            Optional<Long> idTipoUd, Optional<Long> idUserVers, UdFilter filter);
 
     /**
      * Restituisce la pk della struttura abilitata su utente invocante

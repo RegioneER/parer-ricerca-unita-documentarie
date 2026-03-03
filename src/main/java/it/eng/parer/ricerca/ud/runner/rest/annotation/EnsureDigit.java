@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({
-	ElementType.FIELD, ElementType.PARAMETER })
+        ElementType.FIELD, ElementType.PARAMETER })
 public @interface EnsureDigit {
 
     boolean integer() default true;

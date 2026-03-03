@@ -30,26 +30,26 @@ import jakarta.validation.ConstraintValidatorContext;
 import jakarta.validation.Payload;
 
 public class UdQueryOrdinamentoValidator implements
-	ConstraintValidator<it.eng.parer.ricerca.ud.beans.validator.UdQueryOrdinamentoValidator.ValidUdQueryOrdinamento, UdQuery> {
+        ConstraintValidator<it.eng.parer.ricerca.ud.beans.validator.UdQueryOrdinamentoValidator.ValidUdQueryOrdinamento, UdQuery> {
 
     @Override
     public boolean isValid(UdQuery value, ConstraintValidatorContext context) {
-	// check mandatories (no paging)
-	return value.dataversamento.isEmpty()
-		|| value.dataversamento.isPresent() && Arrays.stream(OrderType.values()).anyMatch(
-			order -> order.name().equalsIgnoreCase(value.dataversamento.get()));
+        // check mandatories (no paging)
+        return value.dataversamento.isEmpty()
+                || value.dataversamento.isPresent() && Arrays.stream(OrderType.values()).anyMatch(
+                        order -> order.name().equalsIgnoreCase(value.dataversamento.get()));
 
     }
 
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.RUNTIME)
     @Constraint(validatedBy = {
-	    UdQueryOrdinamentoValidator.class })
+            UdQueryOrdinamentoValidator.class })
     public @interface ValidUdQueryOrdinamento {
-	String message() default "Filtro impostato non corretto";
+        String message() default "Filtro impostato non corretto";
 
-	Class<?>[] groups() default {};
+        Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default {};
+        Class<? extends Payload>[] payload() default {};
     }
 }

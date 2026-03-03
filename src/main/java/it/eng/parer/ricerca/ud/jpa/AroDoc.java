@@ -69,89 +69,89 @@ public class AroDoc implements Serializable {
     private BigDecimal pgDoc;
 
     public AroDoc() {
-	// hibernate
+        // hibernate
     }
 
     @Id
     @Column(name = "ID_DOC")
     public Long getIdDoc() {
-	return this.idDoc;
+        return this.idDoc;
     }
 
     @Column(name = "CD_KEY_DOC_VERS")
     public String getCdKeyDocVers() {
-	return this.cdKeyDocVers;
+        return this.cdKeyDocVers;
     }
 
     @Column(name = "DS_MSG_ESITO_VERIF_FIRME")
     public String getDsMsgEsitoVerifFirme() {
-	return this.dsMsgEsitoVerifFirme;
+        return this.dsMsgEsitoVerifFirme;
     }
 
     @Column(name = "DT_CREAZIONE")
     public LocalDate getDtCreazione() {
-	return this.dtCreazione;
+        return this.dtCreazione;
     }
 
     @Column(name = "FL_DOC_FIRMATO", columnDefinition = "char(1)")
     public String getFlDocFirmato() {
-	return this.flDocFirmato;
+        return this.flDocFirmato;
     }
 
     @Column(name = "ID_STRUT")
     public BigDecimal getIdStrut() {
-	return this.idStrut;
+        return this.idStrut;
     }
 
     @Column(name = "NM_SISTEMA_MIGRAZ")
     public String getNmSistemaMigraz() {
-	return this.nmSistemaMigraz;
+        return this.nmSistemaMigraz;
     }
 
     @Column(name = "TI_CONSERVAZIONE")
     public String getTiConservazione() {
-	return this.tiConservazione;
+        return this.tiConservazione;
     }
 
     @Column(name = "TI_CREAZIONE")
     public String getTiCreazione() {
-	return this.tiCreazione;
+        return this.tiCreazione;
     }
 
     @Enumerated(EnumType.STRING)
     @Column(name = "TI_DOC")
     public AroDocCnts.TiDoc getTiDoc() {
-	return this.tiDoc;
+        return this.tiDoc;
     }
 
     @Column(name = "TI_ESITO_VERIF_FIRME")
     public String getTiEsitoVerifFirme() {
-	return this.tiEsitoVerifFirme;
+        return this.tiEsitoVerifFirme;
     }
 
     @Column(name = "TS_STATO_ELENCO_VERS")
     public LocalDate getTsStatoElencoVers() {
-	return this.tsStatoElencoVers;
+        return this.tsStatoElencoVers;
     }
 
     @Column(name = "ID_UNITA_DOC")
     public Long getIdUnitaDoc() {
-	return this.idUnitaDoc;
+        return this.idUnitaDoc;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_TIPO_DOC")
     public DecTipoDoc getDecTipoDoc() {
-	return this.decTipoDoc;
+        return this.decTipoDoc;
     }
 
     @Column(name = "PG_DOC")
     public BigDecimal getPgDoc() {
-	return this.pgDoc;
+        return this.pgDoc;
     }
 
     public void setPgDoc(BigDecimal pgDoc) {
-	this.pgDoc = pgDoc;
+        this.pgDoc = pgDoc;
     }
 
 }

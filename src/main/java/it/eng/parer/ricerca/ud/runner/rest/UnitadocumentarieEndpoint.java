@@ -72,38 +72,38 @@ public class UnitadocumentarieEndpoint {
 
     @Inject
     public UnitadocumentarieEndpoint(IFindUnitadocService findUdservice,
-	    SecurityContext securityCtx) {
-	this.findUdservice = findUdservice;
-	this.securityCtx = securityCtx;
+            SecurityContext securityCtx) {
+        this.findUdservice = findUdservice;
+        this.securityCtx = securityCtx;
     }
 
     @Operation(summary = "Lista unità documentarie", description = "Lista unità documentarie con applicazione di query string per filtro del risultato ottenuto")
     @SecurityRequirement(name = "bearerAuth")
     @APIResponses(value = {
-	    @APIResponse(responseCode = "200", description = "Lista unità documentarie recuperata con successo", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UdResponse.class))),
-	    @APIResponse(responseCode = "400", description = "Richiesta non valida", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = AppBadRequestException.class))),
-	    @APIResponse(responseCode = "401", description = "Autenticazione fallita"),
-	    @APIResponse(responseCode = "403", description = "Non autorizzato ad accedere al servizio"),
-	    @APIResponse(responseCode = "405", description = "Invocazione non corretta"),
-	    @APIResponse(responseCode = "500", description = "Errore generico (richiesta non valida secondo specifiche)", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = AppGenericRuntimeException.class))) })
+            @APIResponse(responseCode = "200", description = "Lista unità documentarie recuperata con successo", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UdResponse.class))),
+            @APIResponse(responseCode = "400", description = "Richiesta non valida", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = AppBadRequestException.class))),
+            @APIResponse(responseCode = "401", description = "Autenticazione fallita"),
+            @APIResponse(responseCode = "403", description = "Non autorizzato ad accedere al servizio"),
+            @APIResponse(responseCode = "405", description = "Invocazione non corretta"),
+            @APIResponse(responseCode = "500", description = "Errore generico (richiesta non valida secondo specifiche)", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = AppGenericRuntimeException.class))) })
     @GET
     @Path(RESOURCE_UD)
     @Produces(MediaType.APPLICATION_JSON)
     @Blocking
     public Response listud(@BeanParam @Valid UdQuery udQuery, @Context HttpServerRequest request) {
-	// do something .....
-	UdResponse results = getListaUdResponseFromDto(udQuery, request);
-	//
-	return Response.ok(results)
-		.lastModified(
-			Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
-		.tag(new EntityTag(ETAG)).build();
+        // do something .....
+        UdResponse results = getListaUdResponseFromDto(udQuery, request);
+        //
+        return Response.ok(results)
+                .lastModified(
+                        Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
+                .tag(new EntityTag(ETAG)).build();
     }
 
     private UdResponse getListaUdResponseFromDto(UdQuery udQuery, HttpServerRequest request) {
-	String uri = decodeUriQuietly(request);
-	UdFilter filter = parseUdQuery(udQuery);
-	return findUdservice.findUdByQuertStr(securityCtx.getUserPrincipal().getName(), filter,
-		uri);
+        String uri = decodeUriQuietly(request);
+        UdFilter filter = parseUdQuery(udQuery);
+        return findUdservice.findUdByQuertStr(securityCtx.getUserPrincipal().getName(), filter,
+                uri);
     }
 }

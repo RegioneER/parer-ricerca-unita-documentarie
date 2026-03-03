@@ -48,21 +48,21 @@ public class OrgAmbiente implements Serializable {
     @Id
     @Column(name = "ID_AMBIENTE")
     public Long getIdAmbiente() {
-	return this.idAmbiente;
+        return this.idAmbiente;
     }
 
     @Column(name = "DS_AMBIENTE")
     public String getDsAmbiente() {
-	return this.dsAmbiente;
+        return this.dsAmbiente;
     }
 
     @Column(name = "NM_AMBIENTE")
     public String getNmAmbiente() {
-	return this.nmAmbiente;
+        return this.nmAmbiente;
     }
 
     @OneToMany(mappedBy = "orgAmbiente")
     public List<OrgEnte> getOrgEntes() {
-	return this.orgEntes;
+        return this.orgEntes;
     }
 }

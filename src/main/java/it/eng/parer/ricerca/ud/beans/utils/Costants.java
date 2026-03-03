@@ -16,7 +16,7 @@ package it.eng.parer.ricerca.ud.beans.utils;
 public class Costants {
 
     private Costants() {
-	throw new IllegalStateException("Utility class");
+        throw new IllegalStateException("Utility class");
     }
 
     // nome servizio
@@ -50,11 +50,11 @@ public class Costants {
     public static final String COD_PERM_INTERNAL = "PERMISSION-ERROR";
 
     public enum OrderType {
-	ASC, DESC
+        ASC, DESC
     }
 
     public enum NmClasseTipoDato {
-	REGISTRO, TIPO_UNITA_DOC, TIPO_DOC
+        REGISTRO, TIPO_UNITA_DOC, TIPO_DOC
     }
 
 }

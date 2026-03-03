@@ -54,140 +54,140 @@ class FindUdServiceTest {
 
     @BeforeAll
     static void init() {
-	UdQuery query = new UdQuery();
-	// mandatory
-	query.amb = "PARER_PROVA";
-	query.ente = "ente_test";
-	query.strut = "PARER_TEST";
-	query.anno = 2023;
-	// optional
-	query.tipoud = Optional.empty();
-	query.registro = Optional.empty();
-	query.dataversamento = Optional.empty();
-	query.numero = Optional.empty();
-	query.userid = Optional.empty();
-	query.nextpagetoken = Optional.empty();
-	//
-	filter = new UdFilter(query);
+        UdQuery query = new UdQuery();
+        // mandatory
+        query.amb = "PARER_PROVA";
+        query.ente = "ente_test";
+        query.strut = "PARER_TEST";
+        query.anno = 2023;
+        // optional
+        query.tipoud = Optional.empty();
+        query.registro = Optional.empty();
+        query.dataversamento = Optional.empty();
+        query.numero = Optional.empty();
+        query.userid = Optional.empty();
+        query.nextpagetoken = Optional.empty();
+        //
+        filter = new UdFilter(query);
     }
 
     @Test
     void findUdByQueryStr_ok() {
-	assertDoesNotThrow(() -> service.findUdByQuertStr(USERID, filter, StringUtils.EMPTY));
+        assertDoesNotThrow(() -> service.findUdByQuertStr(USERID, filter, StringUtils.EMPTY));
     }
 
     @Test
     void findUdByQueryStrNoResult_ok() {
-	// filter
-	UdFilter myfilter = UdFilter.builder().amb("PARER_PROVA").ente("ente_test")
-		.strut("PARER_TEST").anno(new BigDecimal(1800)).build();
+        // filter
+        UdFilter myfilter = UdFilter.builder().amb("PARER_PROVA").ente("ente_test")
+                .strut("PARER_TEST").anno(new BigDecimal(1800)).build();
 
-	UdResponse response = assertDoesNotThrow(
-		() -> service.findUdByQuertStr(USERID, myfilter, StringUtils.EMPTY));
-	assertEquals(true, response.getTotale() == 0);
+        UdResponse response = assertDoesNotThrow(
+                () -> service.findUdByQuertStr(USERID, myfilter, StringUtils.EMPTY));
+        assertEquals(true, response.getTotale() == 0);
     }
 
     @Test
     void findUdByQueryStrNoFilter_ko() {
-	ConstraintViolationException exe = assertThrows(ConstraintViolationException.class,
-		() -> service.findUdByQuertStr(USERID, null, StringUtils.EMPTY));
-	assertEquals("filter non valorizzato",
-		exe.getConstraintViolations().stream().findFirst().get().getMessage());
+        ConstraintViolationException exe = assertThrows(ConstraintViolationException.class,
+                () -> service.findUdByQuertStr(USERID, null, StringUtils.EMPTY));
+        assertEquals("filter non valorizzato",
+                exe.getConstraintViolations().stream().findFirst().get().getMessage());
 
     }
 
     @Test
     void findUdByQueryStrNoUserId_ko() {
-	ConstraintViolationException exe = assertThrows(ConstraintViolationException.class,
-		() -> service.findUdByQuertStr(null, filter, StringUtils.EMPTY));
-	assertEquals("userId non valorizzato",
-		exe.getConstraintViolations().stream().findFirst().get().getMessage());
+        ConstraintViolationException exe = assertThrows(ConstraintViolationException.class,
+                () -> service.findUdByQuertStr(null, filter, StringUtils.EMPTY));
+        assertEquals("userId non valorizzato",
+                exe.getConstraintViolations().stream().findFirst().get().getMessage());
     }
 
     @Test
     void findUdByQueryStrNextPageTokenNotNull_ok() {
-	UdResponse response = assertDoesNotThrow(
-		() -> service.findUdByQuertStr(USERID, filter, StringUtils.EMPTY));
-	assertNotNull(response.getNextpagetoken());
+        UdResponse response = assertDoesNotThrow(
+                () -> service.findUdByQuertStr(USERID, filter, StringUtils.EMPTY));
+        assertNotNull(response.getNextpagetoken());
     }
 
     @Test
     void findUdByQueryStrPaginationWithNextPageToken_ok() {
-	// first query
-	UdQuery query1 = new UdQuery();
-	// mandatory
-	query1.amb = "PARER_PROVA";
-	query1.ente = "ente_test";
-	query1.strut = "PARER_TEST";
-	query1.anno = 2023;
-	query1.limite = BigInteger.ONE.intValue();
-	// optional
-	query1.tipoud = Optional.empty();
-	query1.registro = Optional.empty();
-	query1.dataversamento = Optional.empty();
-	query1.numero = Optional.empty();
-	query1.userid = Optional.empty();
-	query1.nextpagetoken = Optional.empty();
-	// filter
-	UdFilter myfilter1 = new UdFilter(query1);
+        // first query
+        UdQuery query1 = new UdQuery();
+        // mandatory
+        query1.amb = "PARER_PROVA";
+        query1.ente = "ente_test";
+        query1.strut = "PARER_TEST";
+        query1.anno = 2023;
+        query1.limite = BigInteger.ONE.intValue();
+        // optional
+        query1.tipoud = Optional.empty();
+        query1.registro = Optional.empty();
+        query1.dataversamento = Optional.empty();
+        query1.numero = Optional.empty();
+        query1.userid = Optional.empty();
+        query1.nextpagetoken = Optional.empty();
+        // filter
+        UdFilter myfilter1 = new UdFilter(query1);
 
-	UdResponse response1 = assertDoesNotThrow(
-		() -> service.findUdByQuertStr(USERID, myfilter1, StringUtils.EMPTY));
-	assertEquals(1, response1.getTotale());
-	assertNotNull(response1.getNextpagetoken());
+        UdResponse response1 = assertDoesNotThrow(
+                () -> service.findUdByQuertStr(USERID, myfilter1, StringUtils.EMPTY));
+        assertEquals(1, response1.getTotale());
+        assertNotNull(response1.getNextpagetoken());
 
-	// next page
-	UdQuery query2 = new UdQuery();
-	query2.nextpagetoken = Optional.of(response1.getNextpagetoken());
-	UdFilter myfilter2 = UdFilterParser.parseUdQuery(query2);
+        // next page
+        UdQuery query2 = new UdQuery();
+        query2.nextpagetoken = Optional.of(response1.getNextpagetoken());
+        UdFilter myfilter2 = UdFilterParser.parseUdQuery(query2);
 
-	UdResponse response2 = assertDoesNotThrow(
-		() -> service.findUdByQuertStr(USERID, myfilter2, StringUtils.EMPTY));
-	assertEquals(1, response2.getTotale());
+        UdResponse response2 = assertDoesNotThrow(
+                () -> service.findUdByQuertStr(USERID, myfilter2, StringUtils.EMPTY));
+        assertEquals(1, response2.getTotale());
 
-	// check different list uds on response1 vs response2
-	assertFalse(response2.getUnitadocumentarie().containsAll(response1.getUnitadocumentarie()));
+        // check different list uds on response1 vs response2
+        assertFalse(response2.getUnitadocumentarie().containsAll(response1.getUnitadocumentarie()));
     }
 
     @Test
     void findUdByQueryStrAndCheckResponseContent_ok() {
-	// filter
-	UdFilter myfilter = UdFilter.builder().amb("PARER_PROVA").ente("ente_test")
-		.strut("PARER_TEST").anno(new BigDecimal(2025)).numero("37455").build();
+        // filter
+        UdFilter myfilter = UdFilter.builder().amb("PARER_PROVA").ente("ente_test")
+                .strut("PARER_TEST").anno(new BigDecimal(2025)).numero("37455").build();
 
-	UdResponse response = assertDoesNotThrow(
-		() -> service.findUdByQuertStr(USERID, myfilter, StringUtils.EMPTY));
-	// check ud response not empty
-	assertFalse(response.getUnitadocumentarie().isEmpty());
-	// check mandatory fields on ud response
-	UdDto dto = response.getUnitadocumentarie().get(0);
-	// check dto
-	assertEquals("CT-", dto.getRegistro());
-	assertEquals(new BigDecimal(2025), dto.getAnno());
-	assertEquals("37455", dto.getNumero());
-	assertEquals("Scontratto", dto.getTipologia());
-	assertEquals(LocalDate.of(2017, 11, 28), dto.getDataunitadocumentaria());
-	assertEquals("CONTRATTO", dto.getTipodocprincipale());
-	assertEquals(new BigDecimal(0), dto.getNrallegati());
-	assertEquals(new BigDecimal(0), dto.getNrannessi());
-	assertEquals(new BigDecimal(0), dto.getNrannotazioni());
-	assertEquals(true, dto.getForzaaccettazione());
-	assertEquals(true, dto.getForzaconservazione());
-	assertEquals(LocalDateTime.of(2025, 03, 24, 13, 29, 57), dto.getDataversamento());
-	assertEquals(false, dto.getFirmato());
-	assertEquals("IN_ELENCO_COMPLETATO", dto.getStatogenindiceaip());
-	assertEquals("AIP_GENERATO", dto.getStatoconservazione());
-	assertEquals(
-		"APPROVAZIONE PROGRAMMA DEGLI INCARICHI ESTERNI DA CONFERIRE NELL'ANNO 2018 (CI/2017/0000001)",
-		dto.getOggetto());
-	// check totale
-	assertEquals(Integer.valueOf(1), response.getTotale());
-	// check nextpagetoken
-	assertEquals(
-		"H4sIAAAAAAAA_y2LsQrCMBQA_-ZthfYlMVrIULCDkyXGruVpMxRMAsmL328VlxuOO6DwMNNgR7tM9joP4CN788XCvjAUzpX_gRtvDijGZLBFBbEGn5MRWioFKzG9fS4U9jcZKk-oL95COvO86_v6e5pWNChdJ3o89UpDTPGyFnOUB60QhezwA929OkCQAAAA",
-		response.getNextpagetoken());
-	// check path
-	assertEquals("asc", response.getDataversamento());
+        UdResponse response = assertDoesNotThrow(
+                () -> service.findUdByQuertStr(USERID, myfilter, StringUtils.EMPTY));
+        // check ud response not empty
+        assertFalse(response.getUnitadocumentarie().isEmpty());
+        // check mandatory fields on ud response
+        UdDto dto = response.getUnitadocumentarie().get(0);
+        // check dto
+        assertEquals("CT-", dto.getRegistro());
+        assertEquals(new BigDecimal(2025), dto.getAnno());
+        assertEquals("37455", dto.getNumero());
+        assertEquals("Scontratto", dto.getTipologia());
+        assertEquals(LocalDate.of(2017, 11, 28), dto.getDataunitadocumentaria());
+        assertEquals("CONTRATTO", dto.getTipodocprincipale());
+        assertEquals(new BigDecimal(0), dto.getNrallegati());
+        assertEquals(new BigDecimal(0), dto.getNrannessi());
+        assertEquals(new BigDecimal(0), dto.getNrannotazioni());
+        assertEquals(true, dto.getForzaaccettazione());
+        assertEquals(true, dto.getForzaconservazione());
+        assertEquals(LocalDateTime.of(2025, 03, 24, 13, 29, 57), dto.getDataversamento());
+        assertEquals(false, dto.getFirmato());
+        assertEquals("IN_ELENCO_COMPLETATO", dto.getStatogenindiceaip());
+        assertEquals("AIP_GENERATO", dto.getStatoconservazione());
+        assertEquals(
+                "APPROVAZIONE PROGRAMMA DEGLI INCARICHI ESTERNI DA CONFERIRE NELL'ANNO 2018 (CI/2017/0000001)",
+                dto.getOggetto());
+        // check totale
+        assertEquals(Integer.valueOf(1), response.getTotale());
+        // check nextpagetoken
+        assertEquals(
+                "H4sIAAAAAAAA_y2LsQrCMBQA_-ZthfYlMVrIULCDkyXGruVpMxRMAsmL328VlxuOO6DwMNNgR7tM9joP4CN788XCvjAUzpX_gRtvDijGZLBFBbEGn5MRWioFKzG9fS4U9jcZKk-oL95COvO86_v6e5pWNChdJ3o89UpDTPGyFnOUB60QhezwA929OkCQAAAA",
+                response.getNextpagetoken());
+        // check path
+        assertEquals("asc", response.getDataversamento());
     }
 
 }

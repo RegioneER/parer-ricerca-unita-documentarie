@@ -40,37 +40,37 @@ public class UdResponse {
     private List<UdDto> unitadocumentarie;
 
     public UdResponse() {
-	super();
+        super();
     }
 
     public UdResponse(List<UdDto> unitadocumentarie, Integer totale, String nextpagetoken,
-	    String uri, String dataversamento) {
-	super();
-	this.unitadocumentarie = unitadocumentarie;
-	this.totale = totale;
-	this.path = uri;
-	this.dataversamento = dataversamento;
-	this.nextpagetoken = nextpagetoken;
+            String uri, String dataversamento) {
+        super();
+        this.unitadocumentarie = unitadocumentarie;
+        this.totale = totale;
+        this.path = uri;
+        this.dataversamento = dataversamento;
+        this.nextpagetoken = nextpagetoken;
     }
 
     public String getPath() {
-	return path;
+        return path;
     }
 
     public Integer getTotale() {
-	return totale;
+        return totale;
     }
 
     public List<UdDto> getUnitadocumentarie() {
-	return unitadocumentarie;
+        return unitadocumentarie;
     }
 
     public String getNextpagetoken() {
-	return nextpagetoken;
+        return nextpagetoken;
     }
 
     public String getDataversamento() {
-	return dataversamento;
+        return dataversamento;
     }
 
 }

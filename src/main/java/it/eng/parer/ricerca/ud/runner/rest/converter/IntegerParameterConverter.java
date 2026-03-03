@@ -23,17 +23,17 @@ public class IntegerParameterConverter implements ParamConverter<Integer> {
 
     @Override
     public Integer fromString(String value) {
-	try {
-	    return Integer.parseInt(value);
-	} catch (NumberFormatException ex) {
-	    throw AppBadRequestException.builder().cause(ex)
-		    .message("Il valore ''{0}'' fornito non è un intero valido", value).build();
-	}
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException ex) {
+            throw AppBadRequestException.builder().cause(ex)
+                    .message("Il valore ''{0}'' fornito non è un intero valido", value).build();
+        }
     }
 
     @Override
     public String toString(Integer number) {
-	return number.toString();
+        return number.toString();
     }
 
 }

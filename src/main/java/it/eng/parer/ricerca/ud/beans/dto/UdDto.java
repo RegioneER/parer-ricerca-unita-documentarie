@@ -61,104 +61,104 @@ public class UdDto implements Serializable {
     private String oggetto;
 
     public UdDto() {
-	super();
+        super();
     }
 
     public UdDto(AroUnitaDoc ud, DecTipoUnitaDoc tipoUd, DecTipoDoc tiDocPrincipal) {
-	// build from entities
-	this.registro = ud.getCdRegistroKeyUnitaDoc();
-	this.anno = ud.getAaKeyUnitaDoc();
-	this.numero = ud.getCdKeyUnitaDoc();
-	this.dataunitadocumentaria = ud.getDtRegUnitaDoc();
-	this.nrallegati = ud.getNiAlleg();
-	this.nrannessi = ud.getNiAnnessi();
-	this.nrannotazioni = ud.getNiAnnot();
-	this.forzaaccettazione = ud.getFlForzaAccettazione();
-	this.forzaconservazione = ud.getFlForzaConservazione();
-	this.dataversamento = ud.getDtCreazione();
-	this.firmato = ud.getFlUnitaDocFirmato();
-	this.esitofirme = ud.getTiEsitoVerifFirme();
-	this.descresitofirme = ud.getDsMsgEsitoVerifFirme();
-	this.statogenindiceaip = ud.getTiStatoUdElencoVers();
-	this.statoconservazione = ud.getTiStatoConservazione().name();
-	this.oggetto = ud.getDlOggettoUnitaDoc();
-	//
-	this.tipologia = tipoUd.getNmTipoUnitaDoc();
-	this.tipodocprincipale = tiDocPrincipal.getNmTipoDoc();
+        // build from entities
+        this.registro = ud.getCdRegistroKeyUnitaDoc();
+        this.anno = ud.getAaKeyUnitaDoc();
+        this.numero = ud.getCdKeyUnitaDoc();
+        this.dataunitadocumentaria = ud.getDtRegUnitaDoc();
+        this.nrallegati = ud.getNiAlleg();
+        this.nrannessi = ud.getNiAnnessi();
+        this.nrannotazioni = ud.getNiAnnot();
+        this.forzaaccettazione = ud.getFlForzaAccettazione();
+        this.forzaconservazione = ud.getFlForzaConservazione();
+        this.dataversamento = ud.getDtCreazione();
+        this.firmato = ud.getFlUnitaDocFirmato();
+        this.esitofirme = ud.getTiEsitoVerifFirme();
+        this.descresitofirme = ud.getDsMsgEsitoVerifFirme();
+        this.statogenindiceaip = ud.getTiStatoUdElencoVers();
+        this.statoconservazione = ud.getTiStatoConservazione().name();
+        this.oggetto = ud.getDlOggettoUnitaDoc();
+        //
+        this.tipologia = tipoUd.getNmTipoUnitaDoc();
+        this.tipodocprincipale = tiDocPrincipal.getNmTipoDoc();
     }
 
     public String getRegistro() {
-	return registro;
+        return registro;
     }
 
     public BigDecimal getAnno() {
-	return anno;
+        return anno;
     }
 
     public String getNumero() {
-	return numero;
+        return numero;
     }
 
     public String getTipologia() {
-	return tipologia;
+        return tipologia;
     }
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     public LocalDate getDataunitadocumentaria() {
-	return dataunitadocumentaria;
+        return dataunitadocumentaria;
     }
 
     public String getTipodocprincipale() {
-	return tipodocprincipale;
+        return tipodocprincipale;
     }
 
     public BigDecimal getNrallegati() {
-	return nrallegati;
+        return nrallegati;
     }
 
     public BigDecimal getNrannessi() {
-	return nrannessi;
+        return nrannessi;
     }
 
     public BigDecimal getNrannotazioni() {
-	return nrannotazioni;
+        return nrannotazioni;
     }
 
     public Boolean getForzaaccettazione() {
-	return forzaaccettazione;
+        return forzaaccettazione;
     }
 
     public Boolean getForzaconservazione() {
-	return forzaconservazione;
+        return forzaconservazione;
     }
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     public LocalDateTime getDataversamento() {
-	return dataversamento;
+        return dataversamento;
     }
 
     public Boolean getFirmato() {
-	return firmato;
+        return firmato;
     }
 
     public String getEsitofirme() {
-	return esitofirme;
+        return esitofirme;
     }
 
     public String getDescresitofirme() {
-	return descresitofirme;
+        return descresitofirme;
     }
 
     public String getStatogenindiceaip() {
-	return statogenindiceaip;
+        return statogenindiceaip;
     }
 
     public String getStatoconservazione() {
-	return statoconservazione;
+        return statoconservazione;
     }
 
     public String getOggetto() {
-	return oggetto;
+        return oggetto;
     }
 
 }

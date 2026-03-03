@@ -44,28 +44,28 @@ public class DecTipoUnitaDoc implements Serializable {
     private Long idStrut;
 
     public DecTipoUnitaDoc() {
-	// hibernate
+        // hibernate
     }
 
     @Id
     @Column(name = "ID_TIPO_UNITA_DOC")
     public Long getIdTipoUnitaDoc() {
-	return this.idTipoUnitaDoc;
+        return this.idTipoUnitaDoc;
     }
 
     @Column(name = "DS_TIPO_UNITA_DOC")
     public String getDsTipoUnitaDoc() {
-	return this.dsTipoUnitaDoc;
+        return this.dsTipoUnitaDoc;
     }
 
     @Column(name = "NM_TIPO_UNITA_DOC")
     public String getNmTipoUnitaDoc() {
-	return this.nmTipoUnitaDoc;
+        return this.nmTipoUnitaDoc;
     }
 
     @Column(name = "ID_STRUT")
     public Long getIdStrut() {
-	return this.idStrut;
+        return this.idStrut;
     }
 
 }

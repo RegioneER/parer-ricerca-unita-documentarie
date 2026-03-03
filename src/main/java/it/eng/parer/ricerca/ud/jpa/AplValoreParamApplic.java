@@ -52,40 +52,40 @@ public class AplValoreParamApplic implements Serializable {
     @Id
     @Column(name = "ID_VALORE_PARAM_APPLIC")
     public Long getIdValoreParamApplic() {
-	return this.idValoreParamApplic;
+        return this.idValoreParamApplic;
     }
 
     @Column(name = "DS_VALORE_PARAM_APPLIC")
     public String getDsValoreParamApplic() {
-	return this.dsValoreParamApplic;
+        return this.dsValoreParamApplic;
     }
 
     @Column(name = "TI_APPART")
     public String getTiAppart() {
-	return this.tiAppart;
+        return this.tiAppart;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_PARAM_APPLIC")
     public AplParamApplic getAplParamApplic() {
-	return this.aplParamApplic;
+        return this.aplParamApplic;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_TIPO_UNITA_DOC")
     public DecTipoUnitaDoc getDecTipoUnitaDoc() {
-	return this.decTipoUnitaDoc;
+        return this.decTipoUnitaDoc;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_AMBIENTE")
     public OrgAmbiente getOrgAmbiente() {
-	return this.orgAmbiente;
+        return this.orgAmbiente;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_STRUT")
     public OrgStrut getOrgStrut() {
-	return this.orgStrut;
+        return this.orgStrut;
     }
 }

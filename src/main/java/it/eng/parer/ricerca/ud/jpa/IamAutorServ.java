@@ -46,30 +46,30 @@ public class IamAutorServ implements Serializable {
     @Id
     @Column(name = "ID_AUTOR_SERV")
     public Long getIdAutorServ() {
-	return this.idAutorServ;
+        return this.idAutorServ;
     }
 
     public void setIdAutorServ(Long idAutorServ) {
-	this.idAutorServ = idAutorServ;
+        this.idAutorServ = idAutorServ;
     }
 
     @Column(name = "NM_SERVIZIO_WEB")
     public String getNmServizioWeb() {
-	return this.nmServizioWeb;
+        return this.nmServizioWeb;
     }
 
     public void setNmServizioWeb(String nmServizioWeb) {
-	this.nmServizioWeb = nmServizioWeb;
+        this.nmServizioWeb = nmServizioWeb;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ABIL_ORGANIZ")
     public IamAbilOrganiz getIamAbilOrganiz() {
-	return this.iamAbilOrganiz;
+        return this.iamAbilOrganiz;
     }
 
     public void setIamAbilOrganiz(IamAbilOrganiz iamAbilOrganiz) {
-	this.iamAbilOrganiz = iamAbilOrganiz;
+        this.iamAbilOrganiz = iamAbilOrganiz;
     }
 
 }

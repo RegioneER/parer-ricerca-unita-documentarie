@@ -28,24 +28,24 @@ public class DigitParameterConverterProvider implements ParamConverterProvider {
     @SuppressWarnings("unchecked")
     @Override
     public <T> ParamConverter<T> getConverter(final Class<T> rawType, final Type genericType,
-	    final Annotation[] annotations) {
-	if (Number.class.isAssignableFrom(rawType)) {
+            final Annotation[] annotations) {
+        if (Number.class.isAssignableFrom(rawType)) {
 
-	    for (Annotation annotation : annotations) {
-		if (annotation instanceof EnsureDigit ensureDigit) {
-		    if (ensureDigit.decimal()) {
-			throw new UnsupportedOperationException("Non supportato");
-		    } else if (ensureDigit.integer()) {
-			return (ParamConverter<T>) new IntegerParameterConverter();
-		    } else {
-			// none of them
-			return null;
-		    }
-		}
-	    }
+            for (Annotation annotation : annotations) {
+                if (annotation instanceof EnsureDigit ensureDigit) {
+                    if (ensureDigit.decimal()) {
+                        throw new UnsupportedOperationException("Non supportato");
+                    } else if (ensureDigit.integer()) {
+                        return (ParamConverter<T>) new IntegerParameterConverter();
+                    } else {
+                        // none of them
+                        return null;
+                    }
+                }
+            }
 
-	}
-	return null;
+        }
+        return null;
     }
 
 }

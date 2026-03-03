@@ -28,20 +28,20 @@ import org.apache.commons.codec.binary.BaseNCodecOutputStream;
 public class Base64UrlEncodeOutputStream extends BaseNCodecOutputStream {
 
     public Base64UrlEncodeOutputStream(final OutputStream outputStream) {
-	this(outputStream, true);
+        this(outputStream, true);
     }
 
     private Base64UrlEncodeOutputStream(final OutputStream outputStream, final boolean doEncode) {
-	super(outputStream, new Base64(true), doEncode);
+        super(outputStream, new Base64(true), doEncode);
     }
 
     public Base64UrlEncodeOutputStream(final OutputStream outputStream, final int lineLength,
-	    final byte[] lineSeparator) {
-	super(outputStream, new Base64(lineLength, lineSeparator, true), true);
+            final byte[] lineSeparator) {
+        super(outputStream, new Base64(lineLength, lineSeparator, true), true);
     }
 
     public Base64UrlEncodeOutputStream(final OutputStream outputStream, final int lineLength,
-	    final byte[] lineSeparator, final CodecPolicy decodingPolicy) {
-	super(outputStream, new Base64(lineLength, lineSeparator, true, decodingPolicy), true);
+            final byte[] lineSeparator, final CodecPolicy decodingPolicy) {
+        super(outputStream, new Base64(lineLength, lineSeparator, true, decodingPolicy), true);
     }
 }

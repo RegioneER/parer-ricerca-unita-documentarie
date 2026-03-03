@@ -29,34 +29,34 @@ import jakarta.validation.ConstraintValidatorContext;
 import jakarta.validation.Payload;
 
 public class UdQueryMandatoriesValidator implements
-	ConstraintValidator<it.eng.parer.ricerca.ud.beans.validator.UdQueryMandatoriesValidator.ValidUdQueryMandatories, UdQuery> {
+        ConstraintValidator<it.eng.parer.ricerca.ud.beans.validator.UdQueryMandatoriesValidator.ValidUdQueryMandatories, UdQuery> {
 
     @Override
     public boolean isValid(UdQuery value, ConstraintValidatorContext context) {
-	// check mandatories (no paging)
-	return value.nextpagetoken.isEmpty() && Objects.nonNull(value.amb)
-		&& Objects.nonNull(value.ente) && Objects.nonNull(value.strut)
-		&& Objects.nonNull(value.anno)
-		|| value.nextpagetoken.isPresent()
-			&& (Objects.isNull(value.amb) && Objects.isNull(value.ente)
-				&& Objects.isNull(value.strut) && Objects.isNull(value.anno)
-				&& Objects.isNull(value.dtuda) && Objects.isNull(value.dtudda)
-				&& Objects.isNull(value.dtversda) && Objects.isNull(value.dtversa)
-				&& Objects.isNull(value.limite) && value.numero.isEmpty()
-				&& value.registro.isEmpty() && value.tipoud.isEmpty()
-				&& value.dataversamento.isEmpty() && value.userid.isEmpty());
+        // check mandatories (no paging)
+        return value.nextpagetoken.isEmpty() && Objects.nonNull(value.amb)
+                && Objects.nonNull(value.ente) && Objects.nonNull(value.strut)
+                && Objects.nonNull(value.anno)
+                || value.nextpagetoken.isPresent()
+                        && (Objects.isNull(value.amb) && Objects.isNull(value.ente)
+                                && Objects.isNull(value.strut) && Objects.isNull(value.anno)
+                                && Objects.isNull(value.dtuda) && Objects.isNull(value.dtudda)
+                                && Objects.isNull(value.dtversda) && Objects.isNull(value.dtversa)
+                                && Objects.isNull(value.limite) && value.numero.isEmpty()
+                                && value.registro.isEmpty() && value.tipoud.isEmpty()
+                                && value.dataversamento.isEmpty() && value.userid.isEmpty());
 
     }
 
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.RUNTIME)
     @Constraint(validatedBy = {
-	    UdQueryMandatoriesValidator.class })
+            UdQueryMandatoriesValidator.class })
     public @interface ValidUdQueryMandatories {
-	String message() default "Filtro impostato non corretto";
+        String message() default "Filtro impostato non corretto";
 
-	Class<?>[] groups() default {};
+        Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default {};
+        Class<? extends Payload>[] payload() default {};
     }
 }

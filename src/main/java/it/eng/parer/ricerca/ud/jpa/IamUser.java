@@ -59,37 +59,37 @@ public class IamUser implements Serializable {
     @Id
     @Column(name = "ID_USER_IAM")
     public Long getIdUserIam() {
-	return this.idUserIam;
+        return this.idUserIam;
     }
 
     @Column(name = "FL_ATTIVO", columnDefinition = "char(1)")
     public String getFlAttivo() {
-	return this.flAttivo;
+        return this.flAttivo;
     }
 
     @Column(name = "FL_CONTR_IP", columnDefinition = "char(1)")
     public String getFlContrIp() {
-	return this.flContrIp;
+        return this.flContrIp;
     }
 
     @Column(name = "FL_USER_ADMIN", columnDefinition = "char(1)")
     public String getFlUserAdmin() {
-	return this.flUserAdmin;
+        return this.flUserAdmin;
     }
 
     @Column(name = "NM_USERID")
     public String getNmUserid() {
-	return this.nmUserid;
+        return this.nmUserid;
     }
 
     @Column(name = "TIPO_USER")
     public String getTipoUser() {
-	return this.tipoUser;
+        return this.tipoUser;
     }
 
     @OneToMany(mappedBy = "iamUser")
     public List<IamAbilOrganiz> getIamAbilOrganizs() {
-	return this.iamAbilOrganizs;
+        return this.iamAbilOrganizs;
     }
 
 }

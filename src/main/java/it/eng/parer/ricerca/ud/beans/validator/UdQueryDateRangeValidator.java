@@ -29,28 +29,28 @@ import jakarta.validation.ConstraintValidatorContext;
 import jakarta.validation.Payload;
 
 public class UdQueryDateRangeValidator implements
-	ConstraintValidator<it.eng.parer.ricerca.ud.beans.validator.UdQueryDateRangeValidator.ValidUdQueryDateRange, UdQuery> {
+        ConstraintValidator<it.eng.parer.ricerca.ud.beans.validator.UdQueryDateRangeValidator.ValidUdQueryDateRange, UdQuery> {
 
     @Override
     public boolean isValid(UdQuery value, ConstraintValidatorContext context) {
-	// check range date validation
-	return (Objects.isNull(value.dtudda) && Objects.isNull(value.dtuda)
-		&& Objects.isNull(value.dtversda) && Objects.isNull(value.dtversa))
-		|| (Objects.nonNull(value.dtudda) && Objects.nonNull(value.dtuda)
-			&& !value.dtuda.before(value.dtudda))
-		|| (Objects.nonNull(value.dtversda) && Objects.nonNull(value.dtversa)
-			&& !value.dtversa.before(value.dtversda));
+        // check range date validation
+        return (Objects.isNull(value.dtudda) && Objects.isNull(value.dtuda)
+                && Objects.isNull(value.dtversda) && Objects.isNull(value.dtversa))
+                || (Objects.nonNull(value.dtudda) && Objects.nonNull(value.dtuda)
+                        && !value.dtuda.before(value.dtudda))
+                || (Objects.nonNull(value.dtversda) && Objects.nonNull(value.dtversa)
+                        && !value.dtversa.before(value.dtversda));
     }
 
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.RUNTIME)
     @Constraint(validatedBy = {
-	    UdQueryDateRangeValidator.class })
+            UdQueryDateRangeValidator.class })
     public @interface ValidUdQueryDateRange {
-	String message() default "Filtro impostato non corretto";
+        String message() default "Filtro impostato non corretto";
 
-	Class<?>[] groups() default {};
+        Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default {};
+        Class<? extends Payload>[] payload() default {};
     }
 }

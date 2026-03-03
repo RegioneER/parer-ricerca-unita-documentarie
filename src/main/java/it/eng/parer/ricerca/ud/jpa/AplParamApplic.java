@@ -52,32 +52,32 @@ public class AplParamApplic implements Serializable {
     @Id
     @Column(name = "ID_PARAM_APPLIC")
     public Long getIdParamApplic() {
-	return this.idParamApplic;
+        return this.idParamApplic;
     }
 
     @Column(name = "NM_PARAM_APPLIC")
     public String getNmParamApplic() {
-	return this.nmParamApplic;
+        return this.nmParamApplic;
     }
 
     @Column(name = "TI_PARAM_APPLIC")
     public String getTiParamApplic() {
-	return this.tiParamApplic;
+        return this.tiParamApplic;
     }
 
     @OneToMany(mappedBy = "aplParamApplic")
     public List<AplValoreParamApplic> getAplValoreParamApplics() {
-	return this.aplValoreParamApplics;
+        return this.aplValoreParamApplics;
     }
 
     @Column(name = "TI_VALORE_PARAM_APPLIC")
     public String getTiValoreParamApplic() {
-	return tiValoreParamApplic;
+        return tiValoreParamApplic;
     }
 
     @Column(name = "FL_APPART_APPLIC", columnDefinition = "char(1)")
     public String getFlAppartApplic() {
-	return this.flAppartApplic;
+        return this.flAppartApplic;
     }
 
 }
