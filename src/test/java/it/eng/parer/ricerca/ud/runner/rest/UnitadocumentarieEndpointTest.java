@@ -92,11 +92,11 @@ class UnitadocumentarieEndpointTest {
     void successDtVersFilter() {
         given().when().queryParam("amb", "PARER_PROVA").queryParam("ente", "ente_test")
                 .queryParam("strut", "PARER_TEST").queryParam("anno", "2023")
-                .queryParam("dtversda", "05-11-2024").queryParam("dtversa", "06-11-2024")
+                .queryParam("dtversda", "01-01-2025").queryParam("dtversa", "27-05-2025")
                 .queryParam("limite", "1").get(URL_GET_UD).then().statusCode(200)
                 .body("$", hasKey("totale")).body("totale", is(1))
                 .body("unitadocumentarie[0].anno", is(2023))
-                .body("unitadocumentarie[0].dataversamento", startsWith("06-11-2024"));
+                .body("unitadocumentarie[0].dataversamento", startsWith("26-05-2025"));
     }
 
     @Test
@@ -143,7 +143,7 @@ class UnitadocumentarieEndpointTest {
                 .queryParam("userid", "test_microservizi").queryParam("limite", "1").get(URL_GET_UD)
                 .then().statusCode(200).body("$", hasKey("totale")).body("totale", is(1))
                 .body("unitadocumentarie[0].anno", is(2023))
-                .body("unitadocumentarie[0].numero", is("test_30395_0900"));
+                .body("unitadocumentarie[0].numero", is("test_30395_0901"));
     }
 
     @Test
@@ -161,7 +161,7 @@ class UnitadocumentarieEndpointTest {
         given().when().queryParam("nextpagetoken", nextpagetoken).get(URL_GET_UD).then()
                 .statusCode(200).body("$", hasKey("totale")).body("totale", is(1))
                 .body("unitadocumentarie[0].anno", is(2023))
-                .body("unitadocumentarie[0].numero", is("test_30395_0901"));
+                .body("unitadocumentarie[0].numero", is("test_30395_0900"));
     }
 
     @Test

@@ -177,16 +177,16 @@ class FindUdDaoTest {
     void findUnitadocsByQueryStrDtVers_ok() {
         // filter
         UdFilter myfilter = UdFilter.builder().amb("PARER_PROVA").ente("ente_test")
-                .strut("PARER_TEST").anno(new BigDecimal(2023)).dtVersDa(LocalDate.of(2024, 11, 6))
-                .dtVersA(LocalDate.of(2024, 11, 6)).build();
+                .strut("PARER_TEST").anno(new BigDecimal(2023)).dtVersDa(LocalDate.of(2025, 5, 26))
+                .dtVersA(LocalDate.of(2025, 5, 26)).build();
 
         Stream<AroUnitaDoc> result = assertDoesNotThrow(() -> dao.findUnitadocsByQueryStr(IDSTRUT,
                 Optional.empty(), Optional.empty(), Optional.empty(), myfilter));
         List<AroUnitaDoc> uds = result.toList();
         List<LocalDate> dtcreuds = uds.stream().map(AroUnitaDoc::getDtCreazione)
                 .map(LocalDateTime::toLocalDate).toList();
-        assertEquals(2, uds.size());
-        assertTrue(dtcreuds.contains(LocalDate.of(2024, 11, 6)));
+        assertEquals(1, uds.size());
+        assertTrue(dtcreuds.contains(LocalDate.of(2025, 5, 26)));
     }
 
     @Test
@@ -255,7 +255,7 @@ class FindUdDaoTest {
 
     @Test
     void findDecTipoDocByUd_ok() {
-        final Long IDUD = 78935159480L; // id unità doc (db snap)
+        final Long IDUD = 89785233412L; // id unità doc (db snap)
         DecTipoDoc result = assertDoesNotThrow(() -> dao.findDecTipoDocByUd(IDSTRUT, IDUD));
         assertEquals("CONTRATTO", result.getNmTipoDoc());
     }
