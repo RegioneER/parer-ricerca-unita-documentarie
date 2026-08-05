@@ -19,23 +19,42 @@ import org.apache.commons.codec.CodecPolicy;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.BaseNCodecInputStream;
 
-public class Base64UrlDecodeInputStream extends BaseNCodecInputStream {
+public class Base64UrlDecodeInputStream extends
+        BaseNCodecInputStream<Base64, Base64UrlDecodeInputStream, Base64UrlDecodeInputStream.Builder> {
+
+    public static class Builder extends
+            BaseNCodecInputStream.AbstracBuilder<Base64UrlDecodeInputStream, Base64, Builder> {
+
+        @Override
+        public Base64UrlDecodeInputStream get() {
+            return new Base64UrlDecodeInputStream(getInputStream(), false);
+        }
+
+        @Override
+        protected Base64 newBaseNCodec() {
+            return Base64.builder().setUrlSafe(true).get();
+        }
+    }
 
     public Base64UrlDecodeInputStream(final InputStream inputStream) {
         this(inputStream, false);
     }
 
     private Base64UrlDecodeInputStream(final InputStream inputStream, final boolean doEncode) {
-        super(inputStream, new Base64(true), doEncode);
+        super(inputStream, Base64.builder().setUrlSafe(true).get(), doEncode);
     }
 
     public Base64UrlDecodeInputStream(final InputStream inputStream, final int lineLength,
             final byte[] lineSeparator) {
-        super(inputStream, new Base64(lineLength, lineSeparator, true), false);
+        super(inputStream, Base64.builder().setLineLength(lineLength)
+                .setLineSeparator(lineSeparator).setUrlSafe(true).get(), false);
     }
 
     public Base64UrlDecodeInputStream(final InputStream inputStream, final int lineLength,
             final byte[] lineSeparator, final CodecPolicy decodingPolicy) {
-        super(inputStream, new Base64(lineLength, lineSeparator, true, decodingPolicy), false);
+        super(inputStream,
+                Base64.builder().setLineLength(lineLength).setLineSeparator(lineSeparator)
+                        .setUrlSafe(true).setDecodingPolicy(decodingPolicy).get(),
+                false);
     }
 }

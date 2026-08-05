@@ -25,23 +25,42 @@ import org.apache.commons.codec.binary.BaseNCodecOutputStream;
  * URL-SAFE.
  *
  */
-public class Base64UrlEncodeOutputStream extends BaseNCodecOutputStream {
+public class Base64UrlEncodeOutputStream extends
+        BaseNCodecOutputStream<Base64, Base64UrlEncodeOutputStream, Base64UrlEncodeOutputStream.Builder> {
+
+    public static class Builder extends
+            BaseNCodecOutputStream.AbstractBuilder<Base64UrlEncodeOutputStream, Base64, Builder> {
+
+        @Override
+        public Base64UrlEncodeOutputStream get() {
+            return new Base64UrlEncodeOutputStream(getOutputStream(), true);
+        }
+
+        @Override
+        protected Base64 newBaseNCodec() {
+            return Base64.builder().setUrlSafe(true).get();
+        }
+    }
 
     public Base64UrlEncodeOutputStream(final OutputStream outputStream) {
         this(outputStream, true);
     }
 
     private Base64UrlEncodeOutputStream(final OutputStream outputStream, final boolean doEncode) {
-        super(outputStream, new Base64(true), doEncode);
+        super(outputStream, Base64.builder().setUrlSafe(true).get(), doEncode);
     }
 
     public Base64UrlEncodeOutputStream(final OutputStream outputStream, final int lineLength,
             final byte[] lineSeparator) {
-        super(outputStream, new Base64(lineLength, lineSeparator, true), true);
+        super(outputStream, Base64.builder().setLineLength(lineLength)
+                .setLineSeparator(lineSeparator).setUrlSafe(true).get(), true);
     }
 
     public Base64UrlEncodeOutputStream(final OutputStream outputStream, final int lineLength,
             final byte[] lineSeparator, final CodecPolicy decodingPolicy) {
-        super(outputStream, new Base64(lineLength, lineSeparator, true, decodingPolicy), true);
+        super(outputStream,
+                Base64.builder().setLineLength(lineLength).setLineSeparator(lineSeparator)
+                        .setUrlSafe(true).setDecodingPolicy(decodingPolicy).get(),
+                true);
     }
 }
